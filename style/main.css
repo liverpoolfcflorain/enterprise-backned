@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  font-family: "Times New Roman", serif;
+  color: #e6c97a;
+}
+
+/* GENERAL SLIDE */
+.slide {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+/* TITLE SLIDE */
+.title-slide {
+  background-image: url("images/title.png");
+}
+
+.title-text {
+  position: absolute;
+  top: 80px;
+  left: 220px;
+  font-size: 48px;
+  font-weight: bold;
+  color: gold;
+  letter-spacing: 3px;
+}
+
+.small-text {
+  position: absolute;
+  top: 160px;
+  left: 220px;
+  font-size: 18px;
+}
+
+/* CRISIS SLIDE */
+.crisis-slide {
+  background-image: url("images/crisis.png");
+}
+
+.crisis-heading {
+  position: absolute;
+  top: 150px;
+  right: 260px;
+  font-size: 54px;
+  font-weight: bold;
+  color: gold;
+}
+
+.crisis-paragraph {
+  position: absolute;
+  top: 240px;
+  right: 260px;
+  width: 420px;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.budget {
+  position: absolute;
+  top: 420px;
+  right: 260px;
+  font-size: 18px;
+  font-style: italic;
+}
+
+/* OPTIONS SLIDE */
+.options-slide {
+  background-image: url("images/options.png");
+}
+
+.option {
+  position: absolute;
+  left: 58%;
+  width: 35%;
+  padding: 18px;
+  border: 1px solid gold;
+  font-size: 20px;
+}
+
+/* Exact option positions */
+#optA { top: 120px; }
+#optB { top: 220px; }
+#optC { top: 320px; }
+#optD { top: 420px; }

@@ -612,7 +612,7 @@
         <div class="crisis-content">
             <div class="crisis-logo">
                 <img 
-                    src="../pictures/ChatGPT Image Jan 16, 2026, 06_32_43 PM.png" 
+                    src="pictures/ChatGPT Image Jan 16, 2026, 06_32_43 PM.png" 
                     alt="The Enterprise Logo"
                 />
             </div>
@@ -631,7 +631,7 @@
     <div class="dataroom-section">
         <div class="dataroom-header">
             <img 
-                src="../pictures/ChatGPT Image Jan 16, 2026, 06_32_43 PM.png" 
+                src="pictures/ChatGPT Image Jan 16, 2026, 06_32_43 PM.png" 
                 alt="The Enterprise Logo"
             />
             <h1 class="dataroom-title">WHISPERS IN THE DATA ROOM</h1>
@@ -647,7 +647,7 @@
         <div class="options-content">
             <div class="options-logo">
                 <img 
-                    src="../pictures/ChatGPT Image Jan 16, 2026, 06_32_43 PM.png" 
+                    src="pictures/ChatGPT Image Jan 16, 2026, 06_32_43 PM.png" 
                     alt="The Enterprise Logo"
                 />
             </div>
@@ -701,7 +701,7 @@
     <div class="leaderboard-section">
         <div class="leaderboard-header">
             <img 
-                src="../pictures/ChatGPT Image Jan 16, 2026, 06_32_43 PM.png" 
+                src="pictures/ChatGPT Image Jan 16, 2026, 06_32_43 PM.png" 
                 alt="The Enterprise Logo"
             />
             <h1 class="leaderboard-title">TEAM RANKINGS</h1>
@@ -1080,7 +1080,7 @@
                     // Handle cases where budget might be undefined or null
                     const userBudget = user.budget !== undefined && user.budget !== null ? user.budget : 0;
                     
-                    const formattedBudget = '
+                    
 
         // Initialize page
         window.addEventListener('DOMContentLoaded', async () => {
@@ -1099,9 +1099,8 @@
             setInterval(fetchLatestCrisis, 1000);
             setInterval(fetchLeaderboard, 5000); // Update leaderboard every 5 seconds
         });
-    </script>
-</body>
-</html> + userBudget.toLocaleString('en-US', {
+
+            const formattedBudget = userBudget.toLocaleString('en-US', {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
                     });

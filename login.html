@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, gold, darkblue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-box {
+    background: white;
+    padding: 30px;
+    width: 320px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  .login-box h2 {
+    margin-bottom: 20px;
+  }
+
+  .login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .login-box button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 6px;
+    background: black;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .login-box button:hover {
+    background: #333;
+  }
+
+  .login-box button:disabled {
+    background: gray;
+    cursor: not-allowed;
+  }
+
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .success {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .attempts {
+    font-size: 13px;
+    margin-top: 8px;
+    color: #555;
+  }
+
+  .back {
+    width: 50px;
+    height: 25px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .back:hover {
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+<button class="back" onclick="document.location.href ='index.html'">
+  <img src="../pictures/download__8_-removebg-preview.png" alt="Back" style="
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  ">
+</button>
+
+<div class="login-box">
+  <h2>Login</h2>
+
+  <input type="text" id="username" placeholder="Username" required>
+  <input type="password" id="password" placeholder="Password" required>
+
+  <button id="loginBtn" onclick="check()">Sign In</button>
+
+  <div class="error" id="error"></div>
+  <div class="success" id="success"></div>
+  <div class="attempts" id="attempts"></div>
+</div>
+
+<script>
+// UPDATED: Change API URL to your local PHP backend
+const api = 'https://enterprise-1-a9xi.onrender.com';
+
+
+
+async function getLogin() {
+  try {
+    const response = await fetch(`${api}/admin-login`);
+    const data = await response.json();
+    console.log('Login data received:', data);
+    return data;
+  } catch (error) {
+    console.error('Error fetching login data:', error);
+    document.getElementById('error').textContent = 'Failed to connect to server';
+    return [];
+  }
+}
+
+async function check() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  console.log('Attempting login with:', username, password);
+  
+  const errorEl = document.getElementById('error');
+  const successEl = document.getElementById('success');
+  const loginBtn = document.getElementById('loginBtn');
+  
+  // Clear previous messages
+  errorEl.textContent = '';
+  successEl.textContent = '';
+  
+  // Validation
+  if (!username || !password) {
+    errorEl.textContent = 'Please enter both username and password';
+    return;
+  }
+  
+  // Disable button while checking
+  loginBtn.disabled = true;
+  loginBtn.textContent = 'Checking...';
+  
+  try {
+    const data = await getLogin();
+
+
+    // Check credentials
+    let validLogin = false;
+    for (let i = 0; i < data.length; i++) {
+      console.log('Checking:', data[i].username);
+      console.log('Against:', username);
+      console.log('Checking password:', data[i].password);
+      
+      if (username === data[i].username && String(password) === String(data[i].password)) {
+        validLogin = true;
+        successEl.textContent = 'Login successful! Redirecting...';
+        
+        // Redirect after short delay
+        setTimeout(() => {
+          document.location.href = 'admin.html';
+        }, 500);
+        
+        return;
+      }
+    }
+    
+    // Invalid credentials
+    if (!validLogin) {
+      errorEl.textContent = 'Invalid username or password';
+      console.log('Invalid credentials');
+    }
+    
+  } catch (error) {
+    console.error('Login error:', error);
+    errorEl.textContent = 'Login failed. Please try again.';
+  } finally {
+    // Re-enable button
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'Sign In';
+  }
+}
+
+// Allow Enter key to submit
+document.getElementById('password').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    check();
+  }
+});
+
+document.getElementById('username').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    check();
+  }
+});
+</script>
+
+</body>
+</html>
